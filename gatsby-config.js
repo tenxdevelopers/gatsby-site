@@ -3,7 +3,7 @@ module.exports = {
     siteUrl: "https://www.yourdomain.tld",
     title: "My Gatsby Site",
   },
-  plugins: [
+  plugins: [    
     "gatsby-plugin-gatsby-cloud",
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
@@ -14,8 +14,7 @@ module.exports = {
       options: {
         name: "blog",
         path: `${__dirname}/blog`,
-      },
-      __key: "blogs",
+      }
     },
   ],
 };

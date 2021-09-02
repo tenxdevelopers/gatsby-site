@@ -4,11 +4,14 @@ import { graphql } from 'gatsby'
 
 import Layout from '../../components/layout'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 
 const BlogPost = ({data}) => {    
+    const img = getImage(data.mdx.frontmatter.hero_image)
     return (
         <Layout pageTitle={data.mdx.frontmatter.title}>
-            <p>{data.mdx.frontmatter.date}</p>
+            <p>Posted: {data.mdx.frontmatter.date}</p>
+            <GatsbyImage image={img} alt={data.mdx.frontmatter.hero_image_alt}/>
             <MDXRenderer>
                 {data.mdx.body}
             </MDXRenderer>
@@ -19,15 +22,21 @@ const BlogPost = ({data}) => {
 
 
 export const query = graphql `
-    query ($id: String) {
-        mdx(id: {eq: $id}) {
-            frontmatter {
-                date(formatString: "MMM D, YYYY")
-                title
-            }        
-            body
+    query ($slug: String) {
+        mdx(slug: {eq: $slug}) {
+          frontmatter {
+            title
+            hero_image_alt
+            date(formatString: "MMM D, YYYY")
+            hero_image {
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
+          }
+          body
         }
-    }
+      }
 `
 
 export default BlogPost

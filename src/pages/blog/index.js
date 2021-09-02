@@ -4,11 +4,12 @@ import { graphql, Link } from 'gatsby'
 
 import Layout from '../../components/layout'
 
-const BlogPage = ({data}) => {
+const BlogPage = ({data}) => {    
+
     return (
         <Layout pageTitle="My Blog Posts">
             {
-                data.allMdx.nodes.map((node) => {
+                data.allMdx.nodes.map((node) => {                   
                     return (
                         <article key={node.id}>
                             <h2>
@@ -30,8 +31,8 @@ query {
     allMdx(sort: {fields: frontmatter___date, order: DESC}) {
       nodes {
         frontmatter {
-          date(formatString: "MMM D, YYYY")
           title
+          date(formatString: "MMM D, YYYY")
         }
         id
         slug
